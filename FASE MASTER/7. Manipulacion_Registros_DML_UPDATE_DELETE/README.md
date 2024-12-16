@@ -30,13 +30,13 @@ Nos sirve para **_eliminar_** registros de nuestra tabla.
 >
 > Si dejamos esta consulta así: `DELETE FROM [table]` estaríamos eliminando **TODOS** los registros de la _table_, siendo algo contraproducente ya que **COLAPSARÍA** la BBDD.
 
-La sintáxis correcta es:
+La sintaxis correcta es:
 
 ```SQL
 DELETE FROM [table] WHERE [field] = {requeriment}
 ```
 
-#### EJERCICIO: Insertar un nuevo Duty (Relacionado con la siguiente clase)
+- **EJERCICIO**: Insertar un nuevo Duty (Relacionado con la siguiente clase)
 
 ```SQL
 INSERT INTO Duty (dutyTime, state, observation)
@@ -44,12 +44,13 @@ VALUES ('2019-01-22 10:00', 0, 'Turno pendiente de aprobación')
 ```
 
 - Ahora, añadimos un nuevo registro a la tabla **PatientDuty** utilizando el registro anterior.
+
   ```SQL
   INSERT INTO PatientDuty (idDuty, idPatient, idDoctor)
   VALUES (6,9,1)
   ```
 
-### DELETE y su relación con las Foreign Keys.
+### DELETE y su relación con las Foreign Keys
 
 Si intentas eliminar un dato que esta relacionada con otra tabla como una FK, esto no podrá ocurrir debido a la restricción REFERENCE. Aparece lo siguiente:
 
@@ -67,10 +68,13 @@ Si quieres aun así quieres eliminar ese dato, tienes que hacer lo siguiente:
 #### EJERCICIO: Eliminar un Duty
 
 1. Eliminamos el **PatientDuty** correspondiente al _Duty_ que queremos eliminar.
+
    ```SQL
    DELETE FROM PatientDuty WHERE idDuty = 4
    ```
+
 2. Eliminamos el **Duty** correspondiente
+
    ```SQL
    DELETE FROM Duty WHERE idDuty = 4
    ```
@@ -81,11 +85,14 @@ Si quieres aun así quieres eliminar ese dato, tienes que hacer lo siguiente:
    ![allow_nulls_false](./assets/allow_nulls_false_doctor.PNG "Allow Nulls false")
 
 2. Finalmente para comprobar que dichos campos son obligatorios, deberás generar una sentencia INSERT con valor NULL en cualquiera de los dos campos, o en ambos.
+
    ```SQL
    INSERT INTO Doctor (name, surname)
    VALUES (NULL, 'Espinoza')
    ```
+
    Nos sale este error:
+
    > Msg 515, Level 16, State 2, Line 1
    >
    > No se puede insertar el valor **NULL** en la columna **'name'**, tabla **'MedicalCenter.dbo.Doctor'**. La columna no admite valores **NULL**. Error de **INSERT**.
@@ -104,6 +111,7 @@ Si quieres aun así quieres eliminar ese dato, tienes que hacer lo siguiente:
    ![INSERT_INTO_STATEDUTY](./assets/insert_new_registrer_into_stateDuty.PNG "New registrer into StateDuty")
 
 3. Eliminamos ese registro
+
    ```SQL
    DELETE FROM StateDuty WHERE idState = 7
    ```
